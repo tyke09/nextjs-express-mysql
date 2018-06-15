@@ -18,11 +18,27 @@ node v6.10.0
 
 ​	
 
-## 创建项目
+## 创建数据库和表
 
-在磁盘上新建一个文件夹，进入该文件夹，打开命令行工具，并执行：
+打开workbench工具，执行以下sql命令：
 
-```shell
+```mysql
+#创建数据库
+create database testdb;
+
+--创建表
+
+
+
+```
+
+​	
+
+## 初始化项目
+
+在磁盘上新建一个文件夹，进入该文件夹，打开命令行工具，并执行： 
+
+```powershell
 # 初始化项目
 npm init -y
 
@@ -34,6 +50,53 @@ mkdir pages
 ```
 
 ​	
+
+
+
+
+
+## 编写页面
+
+创建文件 `./pages/index.js` ，编写以下代码：
+
+```jsx
+
+```
+
+
+
+## 创建server.js
+
+创建文件 `./server.js` ，编写以下代码：
+
+```jsx
+const express = require('express')
+const next = require('next')
+
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
+
+app.prepare()
+  .then(() => {
+    const server = express()
+     
+    server.get('*', (req, res) => {
+      return handle(req, res)
+    })
+
+    server.listen(3000, (err) => {
+      if (err) throw err
+      console.log('> Ready on http://localhost:3000')
+    })
+  })
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
+```
+
+
 
 ## 添加命令
 
@@ -57,16 +120,6 @@ npm start
 ```
 
 打开浏览器，输入 `http://localhost:3000/` ，可以看到提示"404 This page could not be found"，说明网站启动成功，但是目前找不到任何页面。
-
-​	
-
-## 创建server.js
-
-创建文件 `./server.js` ，编写以下代码：
-
-```jsx
-
-```
 
 
 
