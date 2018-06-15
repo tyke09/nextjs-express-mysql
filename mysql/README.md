@@ -2,7 +2,7 @@
 
 ​	
 
-[安装mysql](install.md)
+[安装mysql](install-mysql.md)
 
 [开始使用](start.md)
 
