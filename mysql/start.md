@@ -22,20 +22,26 @@ node v6.10.0
 
 打开workbench工具，执行以下sql命令：
 
-```sql
+```mysql
+#创建数据库
 create database testdb;
+
+#使用数据库
 use testdb;
 
+#创建表
 create table testtable (
   `id` int auto_increment primary key,
   `name` varchar(45) default null,
   `age` int(11) default null
 );
 
+#加入数据
 insert into testtable (name, age) values ('张三', 20);
 insert into testtable (name, age) values ('李四', 30);
 insert into testtable (name, age) values ('王五', 40);
 
+#创建用户并授权
 create user testuser@'localhost' identified by '123456';
 grant all on localhost.testdb to 'testuser'@'localhost';
 flush privileges;
