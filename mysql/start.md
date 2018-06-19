@@ -43,7 +43,7 @@ insert into testtable (name, age) values ('王五', 40);
 
 #创建用户并授权
 create user testuser@'localhost' identified by '123456';
-grant all on localhost.testdb to 'testuser'@'localhost';
+grant select, insert, update, delete on testdb.* to testuser@'localhost';
 flush privileges;
 ```
 
@@ -60,58 +60,12 @@ flush privileges;
 # 初始化项目
 npm init -y
 
-# 安装react和next
-npm install --save react react-dom next
-
 # 安装mysql
 npm install --save mysql
-
-# 创建文件夹
-mkdir pages
 ```
 
 
 ​	
-
-
-
-
-
-##编写页面
-
-创建文件 ./pages/index.js ，编写以下代码：
-
-```jsx
-import fetch from 'isomorphic-unfetch'
-
-const Index = (props) => (
-  <div>
-    <h1>Batman TV Shows</h1>
-    <ul>
-      {props.shows.map(({ show }) => (
-        <li key={show.id}>
-          {show.name}
-        </li>
-      ))}
-    </ul>
-  </div>
-)
-
-Index.getInitialProps = async function () {
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-  const data = await res.json()
-
-  console.log(`Show data fetched. Count: ${data.length}`)
-
-  return {
-    shows: data
-  }
-}
-
-export default Index
-```
-
-
 
 ##创建server.js
 
@@ -120,51 +74,44 @@ export default Index
 ```jsx
 const express = require('express')
 const next = require('next')
+const mysql = require('mysql');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-app.prepare()
-  .then(() => {
-    const server = express()
-     
-    server.get('*', (req, res) => {
-      return handle(req, res)
-    })
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'testuser',
+  password: '123456',
+  database: 'testdb'
+});
 
-    server.listen(3000, (err) => {
-      if (err) throw err
-      console.log('> Ready on http://localhost:3000')
-    })
-  })
-  .catch((ex) => {
-    console.error(ex.stack)
-    process.exit(1)
-  })
+connection.connect();
+
+const sql = 'select * from testtable';
+
+connection.query(sql, function (error, results, fields) {
+  if (error) throw error;
+  console.log(results);
+});
+
+connection.end();
 ```
 
 
+ 	
 
-##添加命令
+##运行
 
-打开 package.json ，对 scripts 部分进行修改，修改如下：
+在项目根目录执行命令：
 
-    "scripts": {
-      "start": "next"
-    }
+```shell
+# 启动项目
+node server.js
+```
 
-
-​		
-
-##运行项目
-
-在项目根目录执行 npm start 命令：
-
-    # 启动项目
-    npm start
-
-打开浏览器，输入 http://localhost:3000/ ，可以看到提示"404 This page could not be found"，说明网站启动成功，但是目前找不到任何页面。
+可以看到成功从mysql中查询到数据。
 
 
 
