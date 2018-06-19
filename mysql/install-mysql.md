@@ -20,9 +20,6 @@ https://www.mysql.com/
 
 # win10 x64可用的下载链接
 https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-8.0.11.0.msi
-
-# workbench下载链接
-https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community-6.3.10-winx64.msi
 ```
 
 ​	
