@@ -44,7 +44,7 @@ https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-8.0
 
 在 `Type and Networking` 步骤中，使用默认选项，直接点击 `Next > ` ；
 
-在 `Authentication Method` 步骤中，使用默认选项，直接点击 `Next > ` ；
+在 `Authentication Method` 步骤中，选择 `Use Legacy Authentication Method(Retain MySQL 5.x Compatibility)` ，直接点击 `Next > ` ；
 
 在 `Accounts and Roles` 步骤中，填写root密码，填写后点击 `Next >` ;
 
