@@ -4,5 +4,6 @@
 
 [安装mysql](install-mysql.md)
 
-[开始使用](start.md)
+[开始使用mysql](start.md)
 
+[和前台集成](integrate.md)
