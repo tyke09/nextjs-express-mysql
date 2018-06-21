@@ -122,7 +122,10 @@ export default Index
 对 `package.json` 进行如下修改：
 
 ```json
-
+"scripts": {
+  "start": "next",
+  "go": "next build & next start"
+},
 ```
 
 
