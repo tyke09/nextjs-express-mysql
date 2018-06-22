@@ -136,7 +136,7 @@ export default Index
 
 ```shell
 # 启动项目
-node server.js
+npm start
 ```
 
 可以看到成功从mysql中查询到数据，且显示到页面中。
